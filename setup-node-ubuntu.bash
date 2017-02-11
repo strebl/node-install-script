@@ -33,9 +33,9 @@ if [ -n "${NODEJS_VER}" ]; then
   echo "installing ${NODEJS_NAME} as ${NODEJS_NAME} ${NODEJS_VER}..."
 
   if [ -n "$(which curl 2>/dev/null)" ]; then
-    curl -fsSL ${NODEJS_REMOTE} -o ${NODEJS_LOCAL} || echo 'error downloading ${NODEJS_NAME}'
+    curl -fsSL ${NODEJS_REMOTE} -o ${NODEJS_LOCAL} || echo "error downloading ${NODEJS_NAME}"
   elif [ -n "$(which wget 2>/dev/null)" ]; then
-    wget --quiet ${NODEJS_REMOTE} -O ${NODEJS_LOCAL} || echo 'error downloading ${NODEJS_NAME}'
+    wget --quiet ${NODEJS_REMOTE} -O ${NODEJS_LOCAL} || echo "error downloading ${NODEJS_NAME}"
   else
     echo "'wget' and 'curl' are missing. Please run the following command and try again"
     echo "\tsudo apt-get install --yes curl wget"
