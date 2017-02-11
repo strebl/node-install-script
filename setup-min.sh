@@ -225,8 +225,6 @@ if [ -n "$(which node | grep node 2>/dev/null)" ]; then
     echo "I'm going to replace it with a newer version."
     echo ""
   fi
-
-  NODEJS_VER=""
 fi
 
 if [ -n "${NODEJS_VER}" ]; then
