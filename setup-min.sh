@@ -152,17 +152,17 @@ esac
 # Download installers #
 #######################
 
-echo "Preparing to install io.js (and common development dependencies) for ${OS}" "${ARCH}"
+echo "Preparing to install ${NODEJS_NAME} for ${OS}" "${ARCH}"
 
 INSTALL_FILE="setup-node-${SETUP_FILE}.bash"
 if [ ! -e "/tmp/${INSTALL_FILE}" ]
 then
   if [ -n "$(which curl)" ]; then
     curl --silent "${BASE_URL}/${INSTALL_FILE}" \
-      -o "/tmp/${INSTALL_FILE}" || echo 'error downloading os setup script'
+      -o "/tmp/${INSTALL_FILE}" || echo 'error downloading os setup script: '"${BASE_URL}/${INSTALL_FILE}"
   elif [ -n "$(which wget)" ]; then
     wget --quiet "${BASE_URL}/${INSTALL_FILE}" \
-      -O "/tmp/${INSTALL_FILE}" || echo 'error downloading os setup script'
+      -O "/tmp/${INSTALL_FILE}" || echo 'error downloading os setup script: '"${BASE_URL}/${INSTALL_FILE}"
   else
     echo "Found neither 'curl' nor 'wget'. Can't Continue."
     exit 1
@@ -175,9 +175,9 @@ then
   exit 1
 fi
 
-#########################
-# Which io.js VERSION ? #
-#########################
+###########################
+# Which node.js VERSION ? #
+###########################
 
 if [ -f "/tmp/NODEJS_VER" ]; then
   NODEJS_VER=$(cat /tmp/NODEJS_VER | grep v)
@@ -199,10 +199,10 @@ fi
 if [ -z "$NODEJS_VER" ]; then
   if [ -n "$(which curl)" ]; then
     NODEJS_VER=$(curl -fsL "$NODEJS_BASE_URL/dist/index.tab" | head -2 | tail -1 | cut -f 1) \
-      || echo 'error automatically determining current io.js version'
+      || echo "error automatically determining current ${NODEJS_NAME} version"
   elif [ -n "$(which wget)" ]; then
     NODEJS_VER=$(wget --quiet "$NODEJS_BASE_URL/dist/index.tab" -O - | head -2 | tail -1 | cut -f 1) \
-      || echo 'error automatically determining current io.js version'
+      || echo "error automatically determining current ${NODEJS_NAME} version"
   else
     echo "Found neither 'curl' nor 'wget'. Can't Continue."
     exit 1
@@ -222,7 +222,7 @@ if [ -n "$(which node | grep node 2>/dev/null)" ]; then
     echo ""
     echo "node.js is already installed as node $(node -v | grep v)"
     echo ""
-    echo "to reinstall please first run: rm $(which node)"
+    echo "I'm going to replace it with a newer version."
     echo ""
   fi
 
