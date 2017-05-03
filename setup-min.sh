@@ -3,7 +3,7 @@
 # Installs node.js only (no development dependencies) for both Ubuntu and OS X
 
 #
-# See https://github.com/coolaj86/node-install-script
+# See https://github.com/strebl/node-install-script
 #
 
 # curl -fsSL bit.ly/nodejs-min | bash
@@ -14,7 +14,7 @@
 
 NODEJS_NAME="node"
 NODEJS_BASE_URL="https://nodejs.org"
-BASE_URL="https://raw.githubusercontent.com/coolaj86/node-install-script/master"
+BASE_URL="https://raw.githubusercontent.com/strebl/node-install-script/master"
 OS="unsupported"
 ARCH=""
 NODEJS_VER=""
